@@ -11,7 +11,8 @@ class IndexController extends Controller
     public function index()
     {
         $user = Auth::user();
-        dd($user);
-        echo 'Xin chào User, '. $user->name;
+        
+        //echo 'Xin chào User, '. $user->name;
+        return view('layouts.user.master',compact('user'));
     }
 }

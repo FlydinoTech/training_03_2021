@@ -18,7 +18,12 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('home');
         } else {
-            return redirect()->back();
+            // $validated = $request->validate([
+            //     'email' => 'required|unique:posts|max:255',
+            //     'password' => 'required',
+            // ]);
+            $error = 'lỗi';
+            return redirect()->back()->with('msg','Sai thông tin đăng nhập hoặc mật khẩu');
         }
     }
 }
