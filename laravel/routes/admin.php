@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
+use App\Http\Controllers\Admin\Auth\ForgetController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Auth\LogoutController;
+use App\Http\Controllers\Admin\Auth\ResetController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\ScheduleController;
@@ -10,8 +12,11 @@ use Illuminate\Support\Facades\Route;
 //Auth
 Route::get('/login', [LoginController::class, 'login'])->name('admin.login');
 Route::post('/login', [LoginController::class, 'postLogin'])->name('admin.login');
-Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
-Route::get('/forgot-password', [ForgotPasswordController::class, 'forgot'])->name('admin.forgot');
+Route::get('/logout', [LogoutController::class, 'logout'])->name('admin.logout');
+Route::get('/forget', [ForgetController::class, 'forget'])->name('admin.forget');
+Route::post('/forget', [ForgetController::class, 'postForget'])->name('admin.forget');
+Route::get('/reset', [ResetController::class, 'reset'])->name('admin.reset');
+Route::post('/reset', [ResetController::class, 'postReset'])->name('admin.reset');
 
 //Admin
 Route::middleware('auth:admin')->group(function () {

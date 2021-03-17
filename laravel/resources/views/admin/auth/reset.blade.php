@@ -9,27 +9,24 @@
                 </div>
                 <div class="card">
                     <div class="card-body login-card-body">
-                        <p class="login-box-msg">Đăng nhập trang quản trị</p>
+                        <p class="login-box-msg">Đặt lại mật khẩu</p>
                         @if (Session::has('error'))
                             <p class="text-danger text-center"><small>{{ Session::get('error') }}</small></p>
                         @endif
                         @if (Session::has('msg'))
                             <p class="text-success text-center"><small>{{ Session::get('msg') }}</small></p>
                         @endif
-                        <form action="{{ route('admin.login') }}" method="POST">
+                        <form action="" method="POST">
                             @csrf
                             <div class="input-group mb-3">
-                                <input type="email" name="email" value="{{ old('email') }}" class="form-control"
-                                    placeholder="Email">
+                                <input type="email" name="email" value="{{ $email }}" class="form-control"
+                                    placeholder="Email" readonly>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
                                     </div>
                                 </div>
                             </div>
-                            @error('email')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
 
                             <div class="input-group mb-3">
                                 <input type="password" name="password" class="form-control" placeholder="Password">
@@ -43,23 +40,24 @@
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="icheck-primary">
-                                        <input type="checkbox" name="remember" id="remember">
-                                        <label for="remember">
-                                            Ghi nhớ đăng nhập
-                                        </label>
+                            <div class="input-group mb-3">
+                                <input type="password" name="confirm" class="form-control" placeholder="Confirm password">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
                                     </div>
                                 </div>
+                            </div>
+                            @error('confirm')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+
+                            <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Đặt lại</button>
                                 </div>
                             </div>
                         </form>
-                        <p class="mb-1">
-                            <a href="{{ route('admin.forget') }}">Quên mật khẩu?</a>
-                        </p>
                     </div>
                 </div>
             </div>
