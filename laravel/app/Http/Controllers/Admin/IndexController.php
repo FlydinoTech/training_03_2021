@@ -10,7 +10,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        // $user = Auth::guard('admin')->user();
         return view('admin.index.index');
     }
 }

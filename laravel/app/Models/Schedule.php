@@ -15,4 +15,9 @@ class Schedule extends Model
         'start',
         'registered',
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
 }

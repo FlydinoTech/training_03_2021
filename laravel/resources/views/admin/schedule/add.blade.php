@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>KHÓA HỌC</h1>
+                    <h1>LỊCH HỌC</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index.index') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.course.index') }}">Khóa học</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.schedule.index') }}">Lịch học</a></li>
                         <li class="breadcrumb-item active">Thêm</li>
                     </ol>
                 </div>
@@ -26,52 +26,50 @@
                     <!-- Default box -->
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Thêm khóa học</h3>
+                            <h3 class="card-title">Thêm lịch học</h3>
                         </div>
                         <form role="form" method="POST" action="">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Tên khóa học (*)</label>
+                                    <label>Khóa học (*)</label>
+                                    <select name="course_id" id="course-id" class="custom-select">
+                                        <option value="">-- Chọn khóa học --</option>
+                                        @foreach ($objCourses as $item)
+                                            <option value="{{ $item->id }}"
+                                                {{ old('course_id') == $item->id ? 'selected' : '' }}>
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('course_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">Niên khóa (*)</label>
                                     <input type="text" name="name" value="{{ old('name') }}" class="form-control"
-                                        id="name" placeholder="Nhập tên khóa học">
+                                        id="name" placeholder="Nhập tên niên khóa (Vd: PHP 01)">
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tuition">Học phí (*)</label>
-                                    <input type="text" name="tuition" value="{{ old('tuition') }}" class="form-control"
-                                        id="tuition" placeholder="Học phí">
-                                    @error('tuition')
+                                    <label for="start">Ngày khai giảng(*)</label>
+                                    <input type="date" name="start" value="{{ old('start') }}" class="form-control"
+                                        id="start" placeholder="Ngày khai giảng">
+                                    @error('start')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="time">Thời lượng (*)</label>
-                                    <input type="text" name="time" value="{{ old('time') }}" class="form-control"
-                                        id="time" placeholder="Thời gian đào tạo (vd: 6 tháng)">
-                                    @error('time')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="desc">Mô tả (*)</label>
-                                    <textarea name="desc" id="desc" class="form-control"
-                                        placeholder="Nhập mô tả khóa học">{{ old('desc') }}</textarea>
-                                    @error('desc')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="detail">Chi tiết (*)</label>
-                                    <textarea name="detail" id="detail" class="form-control"
-                                        placeholder="Nhập chi tiết khóa học">{{ old('detail') }}</textarea>
-                                    @error('detail')
+                                    <label for="calendar">Lịch học (*)</label>
+                                    <input type="text" name="calendar" value="{{ old('calendar') }}" class="form-control"
+                                        id="calendar" placeholder="Nhập lịch học (Vd: thứ 3, thứ 7 từ 19h-21h30)">
+                                    @error('calendar')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

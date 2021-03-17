@@ -6,8 +6,8 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>
-                        <span class="mr-2">KHÓA HỌC</span>
-                        <a href="{{ route('admin.course.add') }}" class="btn btn-info">
+                        <span class="mr-2">LỊCH HỌC</span>
+                        <a href="{{ route('admin.schedule.add') }}" class="btn btn-info">
                             <i class="fas fa-plus"></i>
                             Thêm mới
                         </a>
@@ -16,7 +16,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index.index') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Khóa học</li>
+                        <li class="breadcrumb-item active">Lịch học</li>
                     </ol>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Danh sách khóa học</h3>
+                            <h3 class="card-title">Danh sách lịch học</h3>
                             <br>
                             @if (Session::has('msg'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -48,30 +48,32 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Khóa học</th>
-                                        <th>Mô tả</th>
-                                        <th>Học phí</th>
-                                        <th>Thời lượng</th>
+                                        <th>Niên khóa</th>
+                                        <th>Ngày khai giảng</th>
+                                        <th>Lịch học</th>
+                                        <th class="text-center">Đã đăng ký</th>
                                         <th class="text-center">Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($objCourses as $item)
+                                    @foreach ($objSchedules as $item)
                                         @php
-                                            $urlEdit = route('admin.course.edit', $item->id);
-                                            $urlDel = route('admin.course.del', $item->id);
+                                            $urlEdit = route('admin.schedule.edit', $item->id);
+                                            $urlDel = route('admin.schedule.del', $item->id);
                                         @endphp
                                         <tr>
                                             <th>{{ $item->id }}</th>
-                                            <td><a href="{{ $urlEdit }}">{{ $item->name }}</a></td>
-                                            <td>{{ $item->desc }}</td>
-                                            <td>{{ number_format($item->tuition, 0, ',', '.') }} vnđ</td>
-                                            <td>{{ $item->time }}</td>
+                                            <td class="text-info"><strong>{{ $item->course->name }}</strong></td>
+                                            <td class="text-danger"><strong>{{ $item->name }}</strong></td>
+                                            <td>{{ $item->start }}</td>
+                                            <td>{{ $item->calendar }}</td>
+                                            <td class="text-center">{{ $item->registered }}</td>
                                             <td class="text-center">
                                                 <a href="{{ $urlEdit }}" class="badge bg-info">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                                 <a href="{{ $urlDel }}" class="badge bg-danger"
-                                                    onclick="return confirm('Bạn thật sự muốn xóa khóa học này?')">
+                                                    onclick="return confirm('Bạn thật sự muốn xóa lịch học này?')">
                                                     <i class="far fa-trash-alt"></i>
                                                 </a>
                                             </td>

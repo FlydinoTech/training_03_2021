@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CourseRequest;
-use Illuminate\Http\Request;
 use App\Models\Course;
 
 class CourseController extends Controller
 {
     public function index()
     {
-        return view('admin.course.index');
+        $objCourses = Course::all();
+        return view('admin.course.index', compact('objCourses'));
     }
 
     public function add()
@@ -34,8 +34,30 @@ class CourseController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $objCourse = Course::findOrFail($id);
+        return view('admin.course.edit', compact('objCourse'));
+    }
+
+    public function postEdit($id, CourseRequest $request)
+    {
+        $data = array(
+            'name' => $request->name,
+            'tuition' => $request->tuition,
+            'time' => $request->time,
+            'desc' => $request->desc,
+            'detail' => $request->detail
+        );
+        Course::where('id', $id)->update($data);
+        return redirect()->route('admin.course.index')->with('msg', 'Cập nhật thông tin khóa học thành công');
+    }
+
     public function del($id)
     {
-        return "Xoa khoa hoc " . $id;
+        $result = Course::destroy($id);
+        if ($result == true) {
+            return redirect()->route('admin.course.index')->with('msg', 'Xóa khóa học thành công!');
+        }
     }
 }
