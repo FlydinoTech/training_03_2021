@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'users';
+    protected $table = 'admins';
+    protected $guarded = 'admin';
     protected $fillable = [
         'name',
         'email',
         'password',
-        'phone',
-        'address',
+        'role',
     ];
     protected $hidden = [
         'password', 'remember_token',
