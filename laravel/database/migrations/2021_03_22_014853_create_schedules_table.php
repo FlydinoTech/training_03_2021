@@ -19,7 +19,7 @@ class CreateSchedulesTable extends Migration
             $table->string('name');
             $table->string('start');
             $table->string('calendar');
-            $table->integer('registered')->default(0);
+            $table->boolean('registered')->default(false);
             $table->timestamps();
         });
     }

@@ -10,7 +10,6 @@ class Register extends Model
     use HasFactory;
     
     protected $fillable = [
-        'id',
         'schedule_id',
         'user_id',
     ];
