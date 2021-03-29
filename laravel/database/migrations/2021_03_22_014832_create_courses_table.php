@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
             $table->text('detail');
             $table->integer('tuition');
             $table->string('time');
+            $table->timestamps();
         });
     }
 

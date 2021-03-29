@@ -8,14 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-    
-    protected $table = 'courses';
+
     protected $fillable = [
         'id',
         'name',
-        'desc',
+        'description',
         'tuituion',
         'time',
     ];
-    public $timestamps = false;
+
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class, 'course_id');
+    }
+
+    public function register()
+    {
+        return $this->hasManyThrough(Register::class, Schedule::class, 'course_id', 'schedule_id');
+    }
 }

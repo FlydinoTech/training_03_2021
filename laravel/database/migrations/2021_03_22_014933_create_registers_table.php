@@ -15,10 +15,8 @@ class CreateRegistersTable extends Migration
     {
         Schema::create('registers', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('schedule_id');
-            $table->unsignedInteger('user_id');
-            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('schedule_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

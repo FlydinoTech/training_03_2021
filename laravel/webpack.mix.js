@@ -16,5 +16,5 @@ mix.js('resources/js/app.js', 'public/js')
         //
     ]);
 
-mix.copy('node_modules/admin-lte/dist/', 'public/templates/admin/dist');
-mix.copy('node_modules/admin-lte/plugins/', 'public/templates/admin/plugins');
+mix.copy('node_modules/admin-lte/dist/', 'public/asset/admin/dist');
+mix.copy('node_modules/admin-lte/plugins/', 'public/asset/admin/plugins');

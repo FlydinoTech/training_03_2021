@@ -9,10 +9,14 @@ class Register extends Model
 {
     use HasFactory;
     
-    protected $table = 'registers';
     protected $fillable = [
         'id',
         'schedule_id',
         'user_id',
     ];
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'schedule_id');
+    }
 }

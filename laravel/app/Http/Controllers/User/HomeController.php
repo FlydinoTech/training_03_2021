@@ -10,7 +10,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        echo 'Trang khách hàng: ' . $user->name;
+       echo "Trang chủ";
     }
 }
