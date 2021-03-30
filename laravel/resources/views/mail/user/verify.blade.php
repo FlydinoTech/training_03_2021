@@ -1,0 +1,1 @@
+<h1>Mã xác nhận mật khẩu của bạn là: <code>{{$code}}</code></h1>
