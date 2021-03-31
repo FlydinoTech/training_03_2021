@@ -1,18 +1,13 @@
 <?php
 
+use App\Http\Controllers\User\Auth\LoginController;
+use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::match(['get', 'post'], '/dang-nhap', [LoginController::class, 'login'])->name('user.auth.login');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('user.home.index');
+
+Route::get('layout-admin', function () {
+    return view('admin.layouts.master');
 });
