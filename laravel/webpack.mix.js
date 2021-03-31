@@ -15,3 +15,6 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+    mix.copyDirectory('node_modules/bootstrap/','public/library/bootstrap');
+    mix.copyDirectory('node_modules/jquery/','public/library/jquery');
+    mix.copyDirectory('node_modules/font-awesome/','public/library/font-awesome');

@@ -106,5 +106,9 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+    'user' => [
+        'email' => 'minhlamtestsendmail@gmail.com',
+        'sendname' => 'flydino',
+    ]
 
 ];
