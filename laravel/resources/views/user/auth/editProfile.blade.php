@@ -30,7 +30,11 @@
                         <label for="">Số điện thoại</label>
                         <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại"
                             value="{{$user->phone}}" class="form-control">
-
+                            @error('phone')
+                            <div>
+                                <code style="color:red">{{$message}}</code>
+                            </div>
+                            @enderror
                     </div>
                     <div class="form-group text-left">
                         <label for="">Địa chỉ</label>

@@ -2,25 +2,25 @@
 
 namespace App\Services\User\Course;
 
+use App\Services\User\Course\BaseService; 
 use App\Models\Course;
 
-class CourseService
+class CourseService extends BaseService
 {
-    private $course;
+    //private $model;
     
     public function __construct(Course $course)
     {
-        $this->course = $course;
+        $this->model = $course;
     }
     
     public function getlist()
     {
-        return $this->course;
+        return $this->model;
     }
     
     public function searchCourse($name)
     {
-        
-        return $this->course->where('name', 'like', '%' . $name . '%');
+        return $this->model->where('name', 'like', '%' . $name . '%');
     }
 }

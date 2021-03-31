@@ -49,7 +49,7 @@ Route::middleware('guest')->group(function () {
         Route::match(['get', 'post'], '/xac-nhan-email', [RegisterController::class, 'verify'])->name('user.auth.verifyRegister');
         //quên mật khẩu
         Route::get('/quen-mat-khau', [ForgotPasswordController::class, 'forgotPassword'])->name('user.auth.forgotPassword');
-        Route::post('/quen-mat-khau', [ForgotPasswordController::class, 'findEmail'])->name('user.auth.findEmail');
+        Route::post('/quen-mat-khau', [ForgotPasswordController::class, 'checkEmail'])->name('user.auth.checkEmail');
         //xác nhận email quên mật khẩu
         Route::match(['get', 'post'], '/xac-nhan-email-dang-ky', [ForgotPasswordController::class, 'verifyForgotPassWord'])->name('user.auth.verifyForgotPassWord');
         //đổi password thành công

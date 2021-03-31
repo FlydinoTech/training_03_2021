@@ -2,20 +2,22 @@
 
 namespace App\Services\User\Auth;
 
+use App\Services\User\Auth\BaseService;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
-class RegisterService 
+class RegisterService  extends BaseService
 {
-    private $model;
+    //private $model;
 
     public function __construct(User $user)
     {
         $this->model = $user;
     }
 
-    public function sendMail($code,$request)
+    public function sendMail($request)
     {
+        $code = rand(1000, 9999);
         $details = [
             'code' => $code,
         ];
@@ -23,10 +25,12 @@ class RegisterService
         $to_email = $request->email;
         $to_fullname = $request->name;
 
-        return Mail::send('mail.user.verify', $details, function ($message) use ($to_email, $to_fullname) {
+         Mail::send('mail.user.verify', $details, function ($message) use ($to_email, $to_fullname) {
             $message->to($to_email, $to_fullname)->subject('Mã xác nhận mật khẩu');
-            $message->from('minhlamtestsendmail@gmail.com', 'FLYDINO');
+            $message->from(config('mail.user.email'), config('mail.user.sendname'));
         });
+
+        return $code;
     }
 
     public function submitRegister($data)

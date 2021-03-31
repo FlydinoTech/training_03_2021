@@ -30,8 +30,8 @@ class RegisterController extends Controller
         }
 
         //sendmail
-        $code = rand(1000, 9999);
-        $this->registerService->sendMail($code,$request);
+      
+        $code = $this->registerService->sendMail($request);
 
         return view('user.auth.verifyRegister', compact(['request', 'code']));
     }

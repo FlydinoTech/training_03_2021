@@ -2,11 +2,12 @@
 
 namespace App\Services\User\Auth;
 
+use App\Services\User\Auth\BaseService;
 use App\Models\User;
 
-class ProfileService
+class ProfileService extends BaseService
 {
-    private $model;
+    //private $model;
 
     public function __construct(User $user)
     {

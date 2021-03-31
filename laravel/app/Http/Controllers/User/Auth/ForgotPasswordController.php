@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Services\User\Auth\ForgotPasswordService;
 // use App\Models\User;
 use Illuminate\Http\Request;
-
-
-
 class ForgotPasswordController extends Controller
 {
     protected $forgotPasswordService;
@@ -23,19 +20,11 @@ class ForgotPasswordController extends Controller
         return view('user.auth.forgotPassword');
     }
     //
-    public function findEmail(Request $request)
+    public function checkEmail(Request $request)
     {
-        $user = $this->forgotPasswordService->findEmail($request->email);
-
-        if (!$user) {
-            return 'false';
-        }
-        $dataUser = [
-            'remember_token' => bcrypt(rand(1000, 9999) . time()),
-        ];
-        $this->forgotPasswordService->updateUser($user->id,$dataUser);
-
-        return $user->id;
+        $user = $this->forgotPasswordService->checkEmail($request);
+       
+        return $user;
     }
     //
     public function verifyForgotPassWord(Request $request)
@@ -43,12 +32,8 @@ class ForgotPasswordController extends Controller
         $user = $this->forgotPasswordService->findEmail($request->email);
 
         if ($request->getMethod() == 'POST' && trim($user->remember_token)) {
-            $dataUser = [
-                'remember_token' => '',
-            ];
-            $this->forgotPasswordService->updateUser($user->id,$dataUser); 
-            $code = rand(1000, 9999);
-            $this->forgotPasswordService->sendMail($code,$request->email);
+         
+           $code =  $this->forgotPasswordService->verifyForgotPassWord($request,$user->id);
 
             return view('user.auth.verifyForgotPassWord', compact(['request', 'code']));
         }
@@ -58,12 +43,7 @@ class ForgotPasswordController extends Controller
     public function newPassword(Request $request)
     {
         if ($request->getMethod() == 'POST') {
-            $user = $this->forgotPasswordService->findEmail($request->email);
-            $newPW =  rand(100000, 999999);
-            $dataUser = [
-                'password' => bcrypt($newPW),
-            ];
-            $this->forgotPasswordService->updateUser($user->id,$dataUser);
+            $newPW = $this->forgotPasswordService->newPassword($request);
 
             return redirect()->route('user.auth.login')->with('newPW', $newPW);
         }

@@ -26,23 +26,23 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'email' => 'required|unique:users|email',
-            'phone' => 'required|unique:users',           
+            'phone' => 'required|unique:users',
         ];
     }
-   
-public function messages()
-{
-   return [
-        'required' => ':attribute Không được để trống',
-        'unique' => ':attribute Đã tồn tại',
-        'email' => ':attribute Không đúng định dạng',
-        'integer' => ':attribute Chỉ được nhập số',
-   ];
 
-}
-public function attributes(){
-    return [
-        'phone' => 'Số điện thoại'
-    ];
-}
+    public function messages()
+    {
+        return [
+            'required' => ':attribute Không được để trống',
+            'unique' => ':attribute Đã tồn tại',
+            'email' => ':attribute Không đúng định dạng',
+            'integer' => ':attribute Chỉ được nhập số',
+        ];
+    }
+    public function attributes()
+    {
+        return [
+            'phone' => 'Số điện thoại'
+        ];
+    }
 }

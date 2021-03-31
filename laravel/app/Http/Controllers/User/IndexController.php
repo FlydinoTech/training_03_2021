@@ -6,25 +6,25 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\User\Course\CourseService;
-use Config;
+
 
 class IndexController extends Controller
 {
-    protected $course;
+    protected $CourseService;
     public function __construct(CourseService $course)
     {
-        $this->course = $course;
+        $this->CourseService = $course;
     }
 
     public function index()
     {
-        $listCourse = $this->course->getList()->paginate(Config::get('paginate.course'));
+        $listCourse = $this->CourseService->getList()->paginate(config('paginate.course'));
         return view('layouts.user.inc.home', compact('listCourse'));
     }
 
-    public function search(Request $re)
+    public function search(Request $request)
     {
-        $listCourse = $this->course->searchCourse($re->search)->paginate(Config::get('paginate.course'));
+        $listCourse = $this->CourseService->searchCourse($request->search)->paginate(config('paginate.course'));
         return view('layouts.user.inc.home', compact('listCourse'));
     }
 }
