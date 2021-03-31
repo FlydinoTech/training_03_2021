@@ -10,7 +10,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $admin = Auth::guard('admin')->user();
-        echo 'Trang quản trị Admin: ' . $admin->name;
+        return view('admin.pages.home.index');
     }
 }

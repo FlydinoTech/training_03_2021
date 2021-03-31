@@ -5,7 +5,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="javascript:void(0)" class="h1"><b>Admin</b>Login</a>
+                <a href="javascript:void(0)" class="h1"><b>Admin</b>Reset</a>
             </div>
             <div class="card-body">
 
@@ -14,14 +14,14 @@
                 @elseif(Session::has('success'))
                     <p class="login-box-msg text-success">{{ Session::get('success') }}</p>
                 @else
-                    <p class="login-box-msg">Đăng nhập truy cập hệ thống</p>
+                    <p class="login-box-msg">Đặt lại mật khẩu</p>
                 @endif
 
-                <form action="{{ route('admin.login') }}" method="POST">
+                <form action="{{ route('admin.reset') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="email" name="email" value="{{ old('email') }}" class="form-control"
-                            placeholder="Email">
+                    <input type="email" value="{{ request()->email }}" name="email" value="{{ old('email') }}" class="form-control"
+                            placeholder="Email" readonly>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -44,25 +44,29 @@
                         <p class="text-center text-danger">{{ $message }}</p>
                     @enderror
 
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" name="remember" id="remember">
-                                <label for="remember">
-                                    Ghi nhớ đăng nhập
-                                </label>
+                    <div class="input-group mb-3">
+                        <input type="password" name="confirm" class="form-control" placeholder="Confirm Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                    </div>
+                    @error('confirm')
+                        <p class="text-center text-danger">{{ $message }}</p>
+                    @enderror
+
+                    <div class="row">
                         <!-- /.col -->
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                            <button type="submit" class="btn btn-primary btn-block">Đặt lại</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
 
                 <p class="mt-2">
-                    <a href="{{ route('admin.forgot') }}">Quên mật khẩu?</a>
+                    <a href="{{ route('admin.login') }}">Quay về trang đăng nhập</a>
                 </p>
             </div>
             <!-- /.card-body -->

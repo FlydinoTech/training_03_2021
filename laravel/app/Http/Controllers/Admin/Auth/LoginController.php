@@ -3,24 +3,25 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
+    public function showLoginForm()
     {
-        if ($request->getMethod() == 'GET') {
-            return view('admin.auth.login');
-        }
+        return view('admin.auth.login');
+    }
 
+    public function login(LoginRequest $request)
+    {
         $credentials = $request->only(['email', 'password']);
+        $remember = $request->remember;
 
-        if (Auth::guard('admin')->attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials, $remember)) {
             return redirect()->route('admin.home.index');
         } else {
-            return redirect()->back()->withInput();
+            return redirect()->back()->with('error', config('message.login.error'));
         }
-        
     }
 }
